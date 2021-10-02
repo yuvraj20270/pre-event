@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/pre-event/static/css/main.97b83c2c.chunk.css",
+    "main.js": "/pre-event/static/js/main.d7476987.chunk.js",
+    "main.js.map": "/pre-event/static/js/main.d7476987.chunk.js.map",
+    "runtime-main.js": "/pre-event/static/js/runtime-main.d489135d.js",
+    "runtime-main.js.map": "/pre-event/static/js/runtime-main.d489135d.js.map",
+    "static/js/2.76a08b98.chunk.js": "/pre-event/static/js/2.76a08b98.chunk.js",
+    "static/js/2.76a08b98.chunk.js.map": "/pre-event/static/js/2.76a08b98.chunk.js.map",
+    "static/js/3.ebc088d1.chunk.js": "/pre-event/static/js/3.ebc088d1.chunk.js",
+    "static/js/3.ebc088d1.chunk.js.map": "/pre-event/static/js/3.ebc088d1.chunk.js.map",
+    "index.html": "/pre-event/index.html",
+    "static/css/main.97b83c2c.chunk.css.map": "/pre-event/static/css/main.97b83c2c.chunk.css.map",
+    "static/js/2.76a08b98.chunk.js.LICENSE.txt": "/pre-event/static/js/2.76a08b98.chunk.js.LICENSE.txt",
+    "static/media/sherlock.4dc15d67.png": "/pre-event/static/media/sherlock.4dc15d67.png",
+    "static/media/index.css": "/pre-event/static/media/smoke_element.0e4b6006.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d489135d.js",
+    "static/js/2.76a08b98.chunk.js",
+    "static/css/main.97b83c2c.chunk.css",
+    "static/js/main.d7476987.chunk.js"
+  ]
+}
