@@ -10,7 +10,9 @@ export default function QuizPage() {
     const { data, loading, error } = useGoogleSheets({
         apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
         sheetId: process.env.REACT_APP_GOOGLE_SHEETS_ID,
+        sheetsNames: ['questions']
     });
+    // console.log(data);
     if (data && data[0]) {
         // console.log(data[0].data[0].QUESTIONS);
         // data[0].data.forEach(question => {
@@ -42,7 +44,7 @@ export default function QuizPage() {
                             <h1 className="text-serif text-custom-yellow text-xl">Loading questions</h1>
                         </div>
                     }
-                    <div className="w-full flex justify-end absolute bottom-2 right-2">
+                    <div className="w-full flex justify-end absolute lg:bottom-2 lg:right-2 bottom-4 mx-auto">
                         <p className="text-gray-400">
                             Website designed by Prakhar Prasad and developed by <a href="https://www.linkedin.com/in/yuvraj-singh-296654190/" target="_blank" className="hover:text-white">Yuvraj Singh</a>
                         </p>
