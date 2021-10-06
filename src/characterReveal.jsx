@@ -7,6 +7,7 @@ import axios from 'axios';
 import useGoogleSheets from 'use-google-sheets';
 
 var character = null;
+var link = null;
 export default function CharacterReveal() {
     var [emailId, changeEmail] = useState('');
     const { data, load, err } = useGoogleSheets({
@@ -14,11 +15,14 @@ export default function CharacterReveal() {
         sheetId: '1Aex4NcDCfKoY72FMqqTvbK7D82VIwP6ALLY5t7BWVUU',
     });
     if (data && data[0]) {
-        var num = Math.floor(Math.random()) % data[0].data.length;
+        var num = Math.floor(Math.random() * data[0].data.length);
+        // console.log(data[0].data.length);
+        // console.log(num);
         if (!character) {
             character = data[0].data[num].Name;
+            link = data[0].data[num].link;
         }
-        console.log(character);
+        // console.log(character);
     }
     return (
         <>
@@ -35,14 +39,7 @@ export default function CharacterReveal() {
                 theme="dark"
             />
             <div className="flex w-full justify-around h-full items-center lg:flex-row flex-col">
-                <div className="flex flex-col bg-white bg-opacity-5 lg:w-1/3 w-4/5 h-4/5 rounded-md justify-around items-center">
-                    <div className="flex flex-wrap justify-center items-center">
-                        <img src={sherlock} alt="..." className="shadow max-w-full h-18 align-middle border-8 border-custom-yellow rounded-full" />
-                    </div>
-
-                    <p className="text-3xl text-white">You are</p>
-                    <p className="lg:text-6xl text-3xl font-serif text-white" dangerouslySetInnerHTML={{__html: character}}></p>
-                </div>
+                <CharacterElement character={character} link={link} />
                 <div className="flex flex-col items-center justify-around h-4/5 lg:w-1/3 w-4/5 rounded-md ">
                     <p className="lg:text-4xl font-semibold text-white text-center">Post this on your story & Tag three of your friends</p>
                     <p className="lg:text-3xl text-white text-center">Are you ready to get exciting cash prizes and a sneak peek at CC’s next event ?</p>
@@ -62,7 +59,7 @@ export default function CharacterReveal() {
                                 theme: "dark"
                             });
                         }
-                        else if(!validator.isEmail(emailId)){
+                        else if (!validator.isEmail(emailId)) {
                             toast.error('Email not valid', {
                                 position: "top-center",
                                 autoClose: 5000,
@@ -74,7 +71,7 @@ export default function CharacterReveal() {
                                 theme: "dark"
                             });
                         }
-                        else{
+                        else {
                             var data;
                             toast.info('Submitting', {
                                 position: "top-center",
@@ -107,8 +104,8 @@ export default function CharacterReveal() {
                                         theme: "dark"
                                     });
                                 }
-                                else{
-                                    axios.post('https://sheet.best/api/sheets/6ca34541-f0c8-4bc0-afaa-3d802475906b', {"Character": character, "email": emailId}).then(response => {
+                                else {
+                                    axios.post('https://sheet.best/api/sheets/6ca34541-f0c8-4bc0-afaa-3d802475906b', { "Character": character, "email": emailId }).then(response => {
                                         toast.success('Successfully registered', {
                                             position: "top-center",
                                             autoClose: 5000,
@@ -118,14 +115,14 @@ export default function CharacterReveal() {
                                             draggable: true,
                                             progress: undefined,
                                             theme: "dark"
-                                            
+
                                         });
                                         window.location.reload();
                                     });
-                                    
+
                                 }
                             });
-                            
+
                         }
                     }}>
                         Submit
@@ -134,4 +131,21 @@ export default function CharacterReveal() {
             </div>
         </>
     );
+}
+
+function CharacterElement(props) {
+    var id;
+    if (props.link && props.link.includes("drive")) {
+        id = props.link.substring(props.link.indexOf('/d/') + 3);
+        id = id.substring(0, id.indexOf('/'));
+        id = "https://drive.google.com/uc?id=" + id;
+    }
+    return (<><div className="flex flex-col bg-white bg-opacity-5 lg:w-1/3 w-4/5 h-4/5 rounded-md justify-around items-center">
+        <div className="flex flex-wrap justify-center items-center relative lg:h-2/3 lg:w-3/4 h-2/3 w-3/4">
+            <img src={id} alt="..." className="object-cover absolute shadow w-full h-full align-middle border-8 border-custom-yellow rounded-full" />
+        </div>
+
+        <p className="text-3xl text-white">You are</p>
+        <p className="lg:text-6xl text-3xl font-serif text-white" dangerouslySetInnerHTML={{ __html: props.character }}></p>
+    </div></>);
 }
